@@ -1,17 +1,218 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Page Header -->
+  <div class="page-header">
+    <ion-badge color="primary" class="page-badge">PROJE</ion-badge>
+    <h1 class="section-title gradient-text">OnkoNixAI Projesi</h1>
+    <p class="section-subtitle">Yapay Zeka ile Beyin Tümörü Teşhis ve Tedavi Sistemi</p>
+  </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <!-- Problem Section -->
+  <div class="content-block glass-card">
+    <div class="block-icon-wrapper">
+      <ion-icon name="medkit" class="block-icon"></ion-icon>
+    </div>
+    <h3>Problem</h3>
+    <p>
+      Beyin tümörleri, dünya genelinde en ölümcül kanser türlerinden biridir. Geleneksel
+      teşhis yöntemleri zaman alıcı ve subjektif değerlendirmelere dayanmaktadır.
+      Radyologların iş yükü ve insan kaynaklı hatalar, erken teşhis oranlarını
+      olumsuz etkilemektedir.
+    </p>
+  </div>
+
+  <!-- Solution Section -->
+  <div class="content-block glass-card">
+    <div class="block-icon-wrapper solution">
+      <ion-icon name="hardware-chip" class="block-icon"></ion-icon>
+    </div>
+    <h3>Çözümümüz</h3>
+    <p>
+      OnkoNixAI, derin öğrenme tabanlı yapay zeka modelleri kullanarak MR görüntülerinden
+      beyin tümörlerini otomatik olarak tespit, sınıflandırma ve segmentasyon yapabilen
+      kapsamlı bir karar destek sistemidir. Sistemimiz 4 farklı tümör türünü yüksek
+      doğrulukla sınıflandırabilmektedir.
+    </p>
+    <div class="tumor-types">
+      <ion-chip color="danger"><ion-label>Glioma</ion-label></ion-chip>
+      <ion-chip color="warning"><ion-label>Meningioma</ion-label></ion-chip>
+      <ion-chip color="primary"><ion-label>Pituitary</ion-label></ion-chip>
+      <ion-chip color="success"><ion-label>No Tumor</ion-label></ion-chip>
+    </div>
+  </div>
+
+  <!-- Pipeline Section -->
+  <div class="pipeline-section">
+    <h2 class="section-title gradient-text">Proje Pipeline</h2>
+    <p class="section-subtitle">Veri girişinden sonuca kadar olan süreç</p>
+
+    <div class="pipeline-steps">
+      <div class="pipeline-step glass-card">
+        <div class="step-number">01</div>
+        <h4>Veri Toplama</h4>
+        <p>MRI görüntülerinin toplanması ve ön işleme tabi tutulması</p>
+      </div>
+
+      <div class="pipeline-step glass-card">
+        <div class="step-number">02</div>
+        <h4>Ön İşleme</h4>
+        <p>Görüntü normalizasyonu, augmentasyon ve veri hazırlığı</p>
+      </div>
+
+      <div class="pipeline-step glass-card">
+        <div class="step-number">03</div>
+        <h4>Model Eğitimi</h4>
+        <p>CNN ve Attention mekanizmalı derin öğrenme model eğitimi</p>
+      </div>
+
+      <div class="pipeline-step glass-card">
+        <div class="step-number">04</div>
+        <h4>Sınıflandırma</h4>
+        <p>Tümör türü tespiti ve güven skoru hesaplaması</p>
+      </div>
+
+      <div class="pipeline-step glass-card">
+        <div class="step-number">05</div>
+        <h4>Segmentasyon</h4>
+        <p>Tümör bölgesinin piksel düzeyinde belirlenmesi</p>
+      </div>
+
+      <div class="pipeline-step glass-card">
+        <div class="step-number">06</div>
+        <h4>Tedavi Önerisi</h4>
+        <p>Kişiselleştirilmiş tedavi planı ve yan etki öngörüsü</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technologies Section -->
+  <div class="tech-section">
+    <h2 class="section-title gradient-text">Teknolojiler</h2>
+    <p class="section-subtitle">Kullandığımız araçlar ve frameworkler</p>
+
+    <div class="tech-grid">
+      <div class="tech-item glass-card">
+        <div class="tech-icon">🧠</div>
+        <span>TensorFlow</span>
+      </div>
+      <div class="tech-item glass-card">
+        <div class="tech-icon">🔥</div>
+        <span>PyTorch</span>
+      </div>
+      <div class="tech-item glass-card">
+        <div class="tech-icon">🐍</div>
+        <span>Python</span>
+      </div>
+      <div class="tech-item glass-card">
+        <div class="tech-icon">📊</div>
+        <span>NumPy</span>
+      </div>
+      <div class="tech-item glass-card">
+        <div class="tech-icon">🖼️</div>
+        <span>OpenCV</span>
+      </div>
+      <div class="tech-item glass-card">
+        <div class="tech-icon">📈</div>
+        <span>Scikit-learn</span>
+      </div>
+      <div class="tech-item glass-card">
+        <div class="tech-icon">🏥</div>
+        <span>DICOM</span>
+      </div>
+      <div class="tech-item glass-card">
+        <div class="tech-icon">⚡</div>
+        <span>CUDA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="results-section">
+    <h2 class="section-title gradient-text">Sonuçlar</h2>
+    <p class="section-subtitle">Model performans metrikleri</p>
+
+    <div class="results-grid">
+      <div class="result-card glass-card">
+        <div class="result-bar">
+          <div class="bar-fill" style="width: 95%"></div>
+        </div>
+        <div class="result-info">
+          <span class="result-label">Accuracy</span>
+          <span class="result-value">%95.2</span>
+        </div>
+      </div>
+
+      <div class="result-card glass-card">
+        <div class="result-bar">
+          <div class="bar-fill bar-secondary" style="width: 93%"></div>
+        </div>
+        <div class="result-info">
+          <span class="result-label">Precision</span>
+          <span class="result-value">%93.8</span>
+        </div>
+      </div>
+
+      <div class="result-card glass-card">
+        <div class="result-bar">
+          <div class="bar-fill bar-tertiary" style="width: 94%"></div>
+        </div>
+        <div class="result-info">
+          <span class="result-label">Recall</span>
+          <span class="result-value">%94.1</span>
+        </div>
+      </div>
+
+      <div class="result-card glass-card">
+        <div class="result-bar">
+          <div class="bar-fill bar-success" style="width: 94%"></div>
+        </div>
+        <div class="result-info">
+          <span class="result-label">F1-Score</span>
+          <span class="result-value">%93.9</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Features -->
+  <div class="key-features-section">
+    <h2 class="section-title gradient-text">Öne Çıkan Özellikler</h2>
+
+    <div class="feature-list">
+      <div class="feature-item glass-card">
+        <ion-icon name="checkmark-circle" class="check-icon"></ion-icon>
+        <div>
+          <h4>Attention Mekanizması</h4>
+          <p>Model kararlarının açıklanabilir ve şeffaf olması</p>
+        </div>
+      </div>
+
+      <div class="feature-item glass-card">
+        <ion-icon name="checkmark-circle" class="check-icon"></ion-icon>
+        <div>
+          <h4>3D MRI Desteği</h4>
+          <p>Üç boyutlu beyin görüntülerinin tam analizi</p>
+        </div>
+      </div>
+
+      <div class="feature-item glass-card">
+        <ion-icon name="checkmark-circle" class="check-icon"></ion-icon>
+        <div>
+          <h4>Yan Etki Öngörüsü</h4>
+          <p>Tedavi sürecinde olası yan etkilerin tahmini</p>
+        </div>
+      </div>
+
+      <div class="feature-item glass-card">
+        <ion-icon name="checkmark-circle" class="check-icon"></ion-icon>
+        <div>
+          <h4>HIPAA/GDPR Uyumlu</h4>
+          <p>Hasta verilerinin güvenli ve uyumlu şekilde işlenmesi</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 40px;"></div>
+
 </ion-content>

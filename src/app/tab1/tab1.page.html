@@ -1,17 +1,121 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-bg-orb orb-1"></div>
+    <div class="hero-bg-orb orb-2"></div>
+    <div class="hero-bg-orb orb-3"></div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <div class="hero-content">
+      <div class="logo-wrapper">
+        <img src="assets/logo/logo_transparent.png" alt="OnkoNixAI Logo" class="hero-logo" />
+      </div>
+
+      <ion-badge color="tertiary" class="hero-badge">
+        <ion-icon name="sparkles"></ion-icon>
+        Onkolojide 3T Yarışması 2025
+      </ion-badge>
+
+      <h1 class="hero-title">
+        <span class="gradient-text">OnkoNixAI</span>
+      </h1>
+      <p class="hero-subtitle">
+        Yapay Zeka ile Beyin Tümörü Teşhisi ve Tedavi Optimizasyonu
+      </p>
+      <p class="hero-description">
+        Derin öğrenme ve medikal görüntü analizi teknolojileri kullanarak beyin tümörlerinin
+        erken teşhisi, sınıflandırması ve tedavi yanıt tahmininde devrim yaratıyoruz.
+      </p>
+
+      <div class="hero-buttons">
+        <ion-button fill="solid" color="primary" shape="round" routerLink="/tabs/tab2">
+          Projemiz
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        </ion-button>
+        <ion-button fill="outline" color="light" shape="round" routerLink="/tabs/tab3">
+          Ekibimiz
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="stats-section">
+    <div class="stat-card glass-card">
+      <div class="stat-number gradient-text">%95+</div>
+      <div class="stat-label">Sınıflandırma Doğruluğu</div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-number gradient-text">4</div>
+      <div class="stat-label">Tümör Türü Tespiti</div>
+    </div>
+    <div class="stat-card glass-card">
+      <div class="stat-number gradient-text">3D</div>
+      <div class="stat-label">MRI Analizi</div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="features-section">
+    <h2 class="section-title gradient-text">Neden OnkoNixAI?</h2>
+    <p class="section-subtitle">Onkoloji alanında yapay zekanın gücünü kullanıyoruz</p>
+
+    <div class="features-grid">
+      <div class="feature-card glass-card">
+        <div class="feature-icon-wrapper">
+          <ion-icon name="bulb" class="feature-icon"></ion-icon>
+        </div>
+        <h3>Erken Teşhis</h3>
+        <p>Yapay zeka destekli MR görüntü analizi ile beyin tümörlerinin erken ve doğru teşhisi</p>
+      </div>
+
+      <div class="feature-card glass-card">
+        <div class="feature-icon-wrapper">
+          <ion-icon name="heart-circle" class="feature-icon"></ion-icon>
+        </div>
+        <h3>Tedavi Optimizasyonu</h3>
+        <p>Kişiselleştirilmiş tedavi planları ve yan etki öngörüsü ile optimal tedavi süreci</p>
+      </div>
+
+      <div class="feature-card glass-card">
+        <div class="feature-icon-wrapper">
+          <ion-icon name="shield-checkmark" class="feature-icon"></ion-icon>
+        </div>
+        <h3>Güvenilir Sonuçlar</h3>
+        <p>Attention mekanizması ve açıklanabilir AI ile şeffaf ve güvenilir tanı desteği</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission Section -->
+  <div class="mission-section glass-card">
+    <h2 class="section-title">Misyonumuz</h2>
+    <p class="mission-text">
+      OnkoNixAI olarak, yapay zeka teknolojilerini onkoloji alanına entegre ederek
+      hastaların yaşam kalitesini artırmayı ve sağlık profesyonellerine güçlü bir
+      karar destek sistemi sunmayı hedefliyoruz. Necmettin Erbakan Üniversitesi
+      bünyesinde geliştirdiğimiz projemizle, beyin tümörü teşhis ve tedavisinde
+      yeni bir çağ başlatıyoruz.
+    </p>
+    <div class="mission-tags">
+      <ion-chip color="primary"><ion-label>Derin Öğrenme</ion-label></ion-chip>
+      <ion-chip color="secondary"><ion-label>Medikal AI</ion-label></ion-chip>
+      <ion-chip color="tertiary"><ion-label>MRI Analizi</ion-label></ion-chip>
+      <ion-chip color="success"><ion-label>Onkoloji</ion-label></ion-chip>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="contact-section">
+    <h2 class="section-title gradient-text">İletişim</h2>
+    <p class="section-subtitle">Bizimle iletişime geçin</p>
+    <div class="contact-info">
+      <ion-button fill="clear" color="light" href="mailto:onkonixai@gmail.com">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        onkonixai&#64;gmail.com
+      </ion-button>
+    </div>
+    <p class="university-text">Necmettin Erbakan Üniversitesi</p>
+  </div>
+
 </ion-content>

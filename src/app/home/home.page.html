@@ -1,0 +1,220 @@
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onScroll($event)">
+
+    <!-- ===== PARTICLES.JS BACKGROUND ===== -->
+    <div id="particles-js" class="particles-bg"></div>
+
+    <!-- ===== FLOATING NAV ===== -->
+    <nav class="glass-nav">
+        <div class="nav-inner">
+            <div class="nav-brand" (click)="scrollToTop()">
+                <img src="assets/logo/logo_transparent.png" alt="Logo" />
+                <span>OnkoNixAI</span>
+            </div>
+            <div class="nav-links">
+                <a (click)="scrollTo('about')">Hakkında</a>
+                <a (click)="scrollTo('project')">Proje</a>
+                <a (click)="scrollTo('team')">Ekip</a>
+                <a (click)="scrollTo('contact')">İletişim</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge anim" data-delay="100">
+                <span class="badge-dot"></span>
+                Onkolojide 3T Yarışması 2025
+            </div>
+
+            <!-- BIG LOGO -->
+            <div class="logo-container anim" data-delay="200">
+                <div class="logo-ring ring-1"></div>
+                <div class="logo-ring ring-2"></div>
+                <div class="logo-ring ring-3"></div>
+                <div class="logo-pulse"></div>
+                <img src="assets/logo/logo_transparent.png" alt="OnkoNixAI" class="logo-img" />
+            </div>
+
+            <h1 class="hero-title anim" data-delay="400">
+                <span class="title-brand">OnkoNixAI</span>
+                <span class="title-small">Yapay Zeka ile</span>
+                <span class="title-typed">{{ typedText }}<span class="cursor"
+                        [class.hide]="!cursorVisible">|</span></span>
+            </h1>
+
+            <p class="hero-sub anim" data-delay="600">
+                Derin öğrenme ve medikal görüntü analizi teknolojileri ile
+                beyin tümörlerinin teşhis ve tedavisinde yeni nesil çözümler
+            </p>
+
+            <div class="hero-actions anim" data-delay="800">
+                <button class="btn-primary" (click)="scrollTo('project')">
+                    Projemizi Keşfedin
+                    <ion-icon name="arrow-down"></ion-icon>
+                </button>
+                <button class="btn-secondary" (click)="scrollTo('team')">Ekibimiz</button>
+            </div>
+
+            <div class="hero-stats anim" data-delay="1000">
+                <div class="stat-item">
+                    <div class="stat-value">%95+</div>
+                    <div class="stat-label">Doğruluk</div>
+                </div>
+                <div class="stat-sep"></div>
+                <div class="stat-item">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Tümör Türü</div>
+                </div>
+                <div class="stat-sep"></div>
+                <div class="stat-item">
+                    <div class="stat-value">3D</div>
+                    <div class="stat-label">MRI Analiz</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-hint" (click)="scrollTo('about')">
+            <div class="scroll-track">
+                <div class="scroll-thumb"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-head anim">
+                <span class="tag">HAKKINDA</span>
+                <h2>Neden <strong>OnkoNixAI</strong>?</h2>
+                <p>Onkoloji alanında güvenilir yapay zeka çözümleri</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="feature-card anim" *ngFor="let card of aboutCards; let i = index"
+                    [attr.data-delay]="i * 150">
+                    <div class="card-accent" [style.background]="card.color"></div>
+                    <div class="card-icon" [style.color]="card.color">
+                        <ion-icon [name]="card.icon"></ion-icon>
+                    </div>
+                    <h3>{{ card.title }}</h3>
+                    <p>{{ card.desc }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECT ===== -->
+    <section id="project" class="section section-gray">
+        <div class="container">
+            <div class="section-head anim">
+                <span class="tag">PROJE</span>
+                <h2>Nasıl <strong>Çalışır</strong>?</h2>
+                <p>MRI'dan teşhise kadar olan süreç</p>
+            </div>
+
+            <!-- Pipeline -->
+            <div class="pipeline anim" data-delay="200">
+                <div class="pipe-line"></div>
+                <div class="pipe-step" *ngFor="let step of pipelineSteps; let i = index"
+                    [style.--step-delay]="i * 0.12 + 's'">
+                    <div class="pipe-dot"></div>
+                    <div class="pipe-card">
+                        <span class="pipe-emoji">{{ step.icon }}</span>
+                        <div>
+                            <span class="pipe-num">ADIM {{ step.num }}</span>
+                            <h4>{{ step.title }}</h4>
+                            <p>{{ step.desc }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics -->
+            <div class="metrics-trigger anim" data-delay="200">
+                <h3 class="sub-head">Model Performansı</h3>
+                <div class="metrics-row">
+                    <div class="metric" *ngFor="let m of animatedMetrics">
+                        <div class="ring-wrap">
+                            <svg viewBox="0 0 120 120">
+                                <circle cx="60" cy="60" r="52" class="ring-bg" />
+                                <circle cx="60" cy="60" r="52" class="ring-val" [style.stroke]="m.color"
+                                    [style.stroke-dasharray]="(m.value / 100 * 326.7) + ' 326.7'" />
+                            </svg>
+                            <span class="ring-num" [style.color]="m.color">%{{ m.value | number:'1.1-1' }}</span>
+                        </div>
+                        <span class="ring-label">{{ m.label }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech -->
+            <div class="anim" data-delay="100">
+                <h3 class="sub-head">Kullanılan Teknolojiler</h3>
+                <div class="tech-scroll">
+                    <div class="tech-band">
+                        <div class="tech-item" *ngFor="let t of techStack">
+                            <span class="t-icon">{{ t.icon }}</span>
+                            <span>{{ t.name }}</span>
+                        </div>
+                        <div class="tech-item" *ngFor="let t of techStack">
+                            <span class="t-icon">{{ t.icon }}</span>
+                            <span>{{ t.name }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TEAM ===== -->
+    <section id="team" class="section">
+        <div class="container" style="max-width: 960px;">
+            <div class="section-head anim">
+                <span class="tag">EKİP</span>
+                <h2>Takımımızla <strong>Tanışın</strong></h2>
+                <p>Necmettin Erbakan Üniversitesi • Mühendislik Fakültesi</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card anim" *ngFor="let m of teamMembers; let i = index" [attr.data-delay]="i * 100">
+                    <div class="tc-image-wrapper">
+                        <img [src]="m.image" [alt]="m.name" />
+                        <div class="tc-overlay"
+                            [style.background]="'linear-gradient(to top, ' + m.color + '22, transparent)'"></div>
+                    </div>
+                    <div class="tc-content">
+                        <h4 [style.color]="m.color">{{ m.name }}</h4>
+                        <p>{{ m.role }}</p>
+                    </div>
+                    <div class="tc-accent" [style.background]="m.color"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="section section-gray">
+        <div class="container">
+            <div class="contact-card anim">
+                <h2>İletişime <strong>Geçin</strong></h2>
+                <p>Projemiz hakkında sorularınız mı var?</p>
+                <a class="btn-primary" href="mailto:onkonixai@gmail.com">
+                    <ion-icon name="mail"></ion-icon>
+                    <span>onkonixai&#64;gmail.com</span>
+                </a>
+                <div class="footer-line">
+                    <span>© 2025 OnkoNixAI</span>
+                    <span>•</span>
+                    <span>Necmettin Erbakan Üniversitesi</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to top -->
+    <button class="btt" [class.show]="showBackToTop" (click)="scrollToTop()">
+        <ion-icon name="chevron-up"></ion-icon>
+    </button>
+
+</ion-content>
