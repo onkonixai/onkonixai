@@ -12,7 +12,7 @@
             </div>
             <div class="nav-links">
                 <a (click)="scrollTo('about')">Hakkında</a>
-                <a (click)="scrollTo('project')">Proje</a>
+                <a (click)="scrollTo('ecosystem')">Ekosistem</a>
                 <a (click)="scrollTo('team')">Ekip</a>
                 <a (click)="scrollTo('contact')">İletişim</a>
             </div>
@@ -22,11 +22,6 @@
     <!-- ===== HERO ===== -->
     <section class="hero">
         <div class="hero-content">
-            <div class="badge anim" data-delay="100">
-                <span class="badge-dot"></span>
-                Onkolojide 3T Yarışması 2025
-            </div>
-
             <!-- BIG LOGO -->
             <div class="logo-container anim" data-delay="200">
                 <div class="logo-ring ring-1"></div>
@@ -45,39 +40,41 @@
 
             <p class="hero-sub anim" data-delay="600">
                 Derin öğrenme ve medikal görüntü analizi teknolojileri ile
-                beyin tümörlerinin teşhis ve tedavisinde yeni nesil çözümler
+                tümörlerinin teşhis ve tedavisinde yeni nesil çözümler
             </p>
 
-            <div class="hero-actions anim" data-delay="800">
-                <button class="btn-primary" (click)="scrollTo('project')">
-                    Projemizi Keşfedin
-                    <ion-icon name="arrow-down"></ion-icon>
-                </button>
-                <button class="btn-secondary" (click)="scrollTo('team')">Ekibimiz</button>
-            </div>
 
-            <div class="hero-stats anim" data-delay="1000">
-                <div class="stat-item">
-                    <div class="stat-value">%95+</div>
-                    <div class="stat-label">Doğruluk</div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="badge anim" data-delay="900" style="margin-bottom: 24px;">
+                    <span class="badge-dot"></span>
+                    Onkolojide 3T
                 </div>
-                <div class="stat-sep"></div>
-                <div class="stat-item">
-                    <div class="stat-value">4</div>
-                    <div class="stat-label">Tümör Türü</div>
-                </div>
-                <div class="stat-sep"></div>
-                <div class="stat-item">
-                    <div class="stat-value">3D</div>
-                    <div class="stat-label">MRI Analiz</div>
+
+                <div class="hero-stats anim" data-delay="1000">
+                    <div class="stat-item">
+                        <div class="stat-value">Tümör</div>
+                        <div class="stat-label">Analizi</div>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">Tanı</div>
+                        <div class="stat-label">Desteği</div>
+                    </div>
+                    <div class="stat-sep"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">Tedavi</div>
+                        <div class="stat-label">Planı</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="scroll-hint" (click)="scrollTo('about')">
-            <div class="scroll-track">
-                <div class="scroll-thumb"></div>
-            </div>
+        <!-- Section Divider: Soft V-Shape -->
+        <div class="hero-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path d="M600,112.77C446.06,112.77,0,0,0,0H1200S753.94,112.77,600,112.77Z" fill="#ffffff"></path>
+            </svg>
         </div>
     </section>
 
@@ -94,78 +91,133 @@
                 <div class="feature-card anim" *ngFor="let card of aboutCards; let i = index"
                     [attr.data-delay]="i * 150">
                     <div class="card-accent" [style.background]="card.color"></div>
-                    <div class="card-icon" [style.color]="card.color">
-                        <ion-icon [name]="card.icon"></ion-icon>
+                    <div class="card-head">
+                        <div class="card-icon" [style.color]="card.color">
+                            <ion-icon [name]="card.icon"></ion-icon>
+                        </div>
+                        <h3>{{ card.title }}</h3>
                     </div>
-                    <h3>{{ card.title }}</h3>
                     <p>{{ card.desc }}</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== PROJECT ===== -->
-    <section id="project" class="section section-gray">
-        <div class="container">
+    <!-- ===== DATA ECOSYSTEM ===== -->
+    <section id="ecosystem" class="section eco-section">
+        <div class="eco-container">
             <div class="section-head anim">
-                <span class="tag">PROJE</span>
-                <h2>Nasıl <strong>Çalışır</strong>?</h2>
-                <p>MRI'dan teşhise kadar olan süreç</p>
+                <span class="tag">VERİ EKOSİSTEMİ</span>
+                <h2>Çok Boyutlu <strong>Veri Kaynakları</strong></h2>
+                <p>OnkoNixAI'ın beslediği veriler — bir kaynağa tıkla ve incele</p>
             </div>
 
-            <!-- Pipeline -->
-            <div class="pipeline anim" data-delay="200">
-                <div class="pipe-line"></div>
-                <div class="pipe-step" *ngFor="let step of pipelineSteps; let i = index"
-                    [style.--step-delay]="i * 0.12 + 's'">
-                    <div class="pipe-dot"></div>
-                    <div class="pipe-card">
-                        <span class="pipe-emoji">{{ step.icon }}</span>
-                        <div>
-                            <span class="pipe-num">ADIM {{ step.num }}</span>
-                            <h4>{{ step.title }}</h4>
-                            <p>{{ step.desc }}</p>
+            <div class="eco-layout anim" data-delay="200" (click)="closeNode()">
+                <!-- Orbital Diagram Wrapper for Scaling -->
+                <div class="eco-orbit-wrapper" (mouseenter)="stopAutoCycle()" (mouseleave)="startAutoCycle()"
+                    (click)="$event.stopPropagation()">
+                    <div class="eco-orbit">
+                        <!-- SVG Ring Only -->
+                        <svg class="eco-ring-svg" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="eg1" x1="240" y1="60" x2="420" y2="240"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#6c5ce7" />
+                                    <stop offset="1" stop-color="#0984e3" />
+                                </linearGradient>
+                                <linearGradient id="eg2" x1="420" y1="240" x2="240" y2="420"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#0984e3" />
+                                    <stop offset="1" stop-color="#00b894" />
+                                </linearGradient>
+                                <linearGradient id="eg3" x1="240" y1="420" x2="60" y2="240"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#00b894" />
+                                    <stop offset="1" stop-color="#e17055" />
+                                </linearGradient>
+                                <linearGradient id="eg4" x1="60" y1="240" x2="240" y2="60"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#e17055" />
+                                    <stop offset="1" stop-color="#6c5ce7" />
+                                </linearGradient>
+                                <filter id="hubShadow" x="-40%" y="-40%" width="180%" height="180%">
+                                    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="rgba(108,92,231,0.22)" />
+                                </filter>
+                            </defs>
+                            <!-- Outer hint ring -->
+                            <circle cx="240" cy="240" r="232" stroke="rgba(108,92,231,0.04)" stroke-width="1.5"
+                                stroke-dasharray="6 5" />
+                            <!-- Orbit arcs -->
+                            <path d="M 240 60 A 180 180 0 0 1 420 240" stroke="url(#eg1)" stroke-width="3.5"
+                                stroke-linecap="round" class="eco-arc" />
+                            <path d="M 420 240 A 180 180 0 0 1 240 420" stroke="url(#eg2)" stroke-width="3.5"
+                                stroke-linecap="round" class="eco-arc" style="animation-delay:0.15s" />
+                            <path d="M 240 420 A 180 180 0 0 1 60 240" stroke="url(#eg3)" stroke-width="3.5"
+                                stroke-linecap="round" class="eco-arc" style="animation-delay:0.3s" />
+                            <path d="M 60 240 A 180 180 0 0 1 240 60" stroke="url(#eg4)" stroke-width="3.5"
+                                stroke-linecap="round" class="eco-arc" style="animation-delay:0.45s" />
+                            <!-- Faint base ring -->
+                            <circle cx="240" cy="240" r="180" stroke="rgba(108,92,231,0.06)" stroke-width="2.5" />
+                            <!-- Connector lines (inner circle → node) -->
+                            <line x1="240" y1="155" x2="240" y2="90" class="eco-line" />
+                            <line x1="287" y1="193" x2="332" y2="148" class="eco-line" />
+                            <line x1="325" y1="240" x2="390" y2="240" class="eco-line" />
+                            <line x1="287" y1="287" x2="332" y2="332" class="eco-line" />
+                            <line x1="240" y1="325" x2="240" y2="390" class="eco-line" />
+                            <line x1="193" y1="287" x2="148" y2="332" class="eco-line" />
+                            <line x1="155" y1="240" x2="90" y2="240" class="eco-line" />
+                            <line x1="193" y1="193" x2="148" y2="148" class="eco-line" />
+                            <!-- Center hub circle -->
+                            <circle cx="240" cy="240" r="82" fill="white" stroke="rgba(108,92,231,0.08)"
+                                stroke-width="1.5" filter="url(#hubShadow)" />
+                        </svg>
+
+                        <!-- Center Hub Logo -->
+                        <div class="eco-hub">
+                            <div class="eco-hub-logo-bg"></div>
+                            <img src="assets/logo/logo_transparent.png" alt="OnkoNixAI Logo" class="eco-hub-img">
+                        </div>
+
+                        <!-- Orbital Nodes -->
+                        <div class="eco-node" *ngFor="let node of ecoNodes; let i = index"
+                            [class.is-active]="activeEcoNode === i"
+                            [style]="{'--ox': node.ox + 'px', '--oy': node.oy + 'px', '--rgb': node.rgb}"
+                            (click)="selectNode(i); $event.stopPropagation()">
+                            <div class="eco-node-btn" [style.borderColor]="node.color">
+                                <div class="eco-node-glow" [style.background]="node.color"></div>
+                                <ion-icon [name]="node.icon" [style.color]="node.color"></ion-icon>
+                            </div>
+                            <span class="eco-node-lbl" [class]="'lp-' + node.lp">{{ node.title }}</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Metrics -->
-            <div class="metrics-trigger anim" data-delay="200">
-                <h3 class="sub-head">Model Performansı</h3>
-                <div class="metrics-row">
-                    <div class="metric" *ngFor="let m of animatedMetrics">
-                        <div class="ring-wrap">
-                            <svg viewBox="0 0 120 120">
-                                <circle cx="60" cy="60" r="52" class="ring-bg" />
-                                <circle cx="60" cy="60" r="52" class="ring-val" [style.stroke]="m.color"
-                                    [style.stroke-dasharray]="(m.value / 100 * 326.7) + ' 326.7'" />
-                            </svg>
-                            <span class="ring-num" [style.color]="m.color">%{{ m.value | number:'1.1-1' }}</span>
+                <!-- Info Panel -->
+                <div class="eco-info" [class.has-node]="activeEcoNode !== null" (mouseenter)="stopAutoCycle()"
+                    (mouseleave)="startAutoCycle()" *ngIf="activeEcoNode !== null" (click)="$event.stopPropagation()">
+                    <button class="eco-close-btn" (click)="closeNode()">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </button>
+                    <div class="eco-info-body">
+                        <div class="eco-info-icon-box" [style.background]="ecoNodes[activeEcoNode!].color + '14'"
+                            [style.borderColor]="ecoNodes[activeEcoNode!].color + '35'">
+                            <ion-icon [name]="ecoNodes[activeEcoNode!].icon"
+                                [style.color]="ecoNodes[activeEcoNode!].color"></ion-icon>
                         </div>
-                        <span class="ring-label">{{ m.label }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tech -->
-            <div class="anim" data-delay="100">
-                <h3 class="sub-head">Kullanılan Teknolojiler</h3>
-                <div class="tech-scroll">
-                    <div class="tech-band">
-                        <div class="tech-item" *ngFor="let t of techStack">
-                            <span class="t-icon">{{ t.icon }}</span>
-                            <span>{{ t.name }}</span>
-                        </div>
-                        <div class="tech-item" *ngFor="let t of techStack">
-                            <span class="t-icon">{{ t.icon }}</span>
-                            <span>{{ t.name }}</span>
+                        <h3>{{ ecoNodes[activeEcoNode!].title }}</h3>
+                        <p>{{ ecoNodes[activeEcoNode!].desc }}</p>
+                        <div class="eco-chip-row">
+                            <span class="eco-chip" *ngFor="let tag of ecoNodes[activeEcoNode!].tags"
+                                [style.color]="ecoNodes[activeEcoNode!].color"
+                                [style.background]="ecoNodes[activeEcoNode!].color + '12'"
+                                [style.borderColor]="ecoNodes[activeEcoNode!].color + '30'">{{ tag }}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- ===== TEAM ===== -->
     <section id="team" class="section">
@@ -177,7 +229,8 @@
             </div>
 
             <div class="team-grid">
-                <div class="team-card anim" *ngFor="let m of teamMembers; let i = index" [attr.data-delay]="i * 100">
+                <div class="team-card anim" *ngFor="let m of teamMembers; let i = index" [attr.data-delay]="i * 100"
+                    (click)="openMember(m)">
                     <div class="tc-image-wrapper">
                         <img [src]="m.image" [alt]="m.name" />
                         <div class="tc-overlay"
@@ -193,20 +246,57 @@
         </div>
     </section>
 
+    <!-- ===== MEMBER INFO OVERLAY ===== -->
+    <div class="member-overlay" [class.show]="selectedMember" (click)="closeMember()">
+        <div class="member-modal" (click)="$event.stopPropagation()" *ngIf="selectedMember">
+            <button class="modal-close" (click)="closeMember()">
+                <ion-icon name="close-outline"></ion-icon>
+            </button>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img [src]="selectedMember.image" [alt]="selectedMember.name">
+                    <div class="modal-image-glow" [style.background]="selectedMember.color"></div>
+                </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 [style.color]="selectedMember.color">{{ selectedMember.name }}</h2>
+                        <span class="modal-role">{{ selectedMember.role }}</span>
+                    </div>
+                    <p class="modal-bio">{{ selectedMember.bio }}</p>
+                    <a [href]="selectedMember.linkedin" target="_blank" class="linkedin-btn">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                        LinkedIn Profilini Görüntüle
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== CONTACT ===== -->
     <section id="contact" class="section section-gray">
         <div class="container">
             <div class="contact-card anim">
                 <h2>İletişime <strong>Geçin</strong></h2>
                 <p>Projemiz hakkında sorularınız mı var?</p>
-                <a class="btn-primary" href="mailto:onkonixai@gmail.com">
-                    <ion-icon name="mail"></ion-icon>
-                    <span>onkonixai&#64;gmail.com</span>
-                </a>
-                <div class="footer-line">
-                    <span>© 2025 OnkoNixAI</span>
-                    <span>•</span>
-                    <span>Necmettin Erbakan Üniversitesi</span>
+
+                <div class="contact-actions">
+                    <a class="btn-primary" href="mailto:onkonixai@gmail.com">
+                        <ion-icon name="mail"></ion-icon>
+                        <span>E-posta Gönder</span>
+                    </a>
+                    <a class="btn-secondary" href="https://www.linkedin.com/company/onkonixai/" target="_blank">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+
+                <div class="contact-footer">
+                    <p class="contact-email">onkonixai&#64;gmail.com</p>
+                    <div class="footer-line">
+                        <span>© 2025 OnkoNixAI</span>
+                        <span>•</span>
+                        <span>Necmettin Erbakan Üniversitesi</span>
+                    </div>
                 </div>
             </div>
         </div>

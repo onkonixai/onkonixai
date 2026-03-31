@@ -5,7 +5,10 @@ import { addIcons } from 'ionicons';
 import {
     sparkles, arrowDown, mail, heartCircle,
     shieldCheckmark, bulb, eyeOutline, chevronUp,
-    checkmarkCircle
+    checkmarkCircle, scanOutline, gitNetworkOutline,
+    documentTextOutline, flaskOutline, medkitOutline,
+    businessOutline, watchOutline, serverOutline,
+    arrowBackCircleOutline, logoLinkedin, closeOutline
 } from 'ionicons/icons';
 
 declare var particlesJS: any;
@@ -19,6 +22,11 @@ declare var particlesJS: any;
 export class HomePage implements OnInit, AfterViewInit, OnDestroy {
 
     showBackToTop = false;
+    activeNode = 0; // Start with first node
+    selectedMember: any = null;
+    activeEcoNode: number | null = null;
+    private hoverTimeout: any;
+    private autoCycleInterval: any;
     typedText = '';
     cursorVisible = true;
     private typingInterval: any;
@@ -35,38 +43,78 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     private charIdx = 0;
     private isDeleting = false;
 
-    animatedMetrics = [
-        { label: 'Accuracy', value: 0, target: 95.2, color: '#6c5ce7', delay: 0 },
-        { label: 'Precision', value: 0, target: 93.8, color: '#0984e3', delay: 200 },
-        { label: 'Recall', value: 0, target: 94.1, color: '#00b894', delay: 400 },
-        { label: 'F1-Score', value: 0, target: 93.9, color: '#e17055', delay: 600 },
-    ];
 
     teamMembers = [
-        { name: 'Rabia Kıratlı', role: 'Proje Lideri & AI Geliştirici', image: 'assets/team/rabia.png', color: '#00b894' },
-        { name: 'Hakan Çiftçi', role: 'Full Stack Developer', image: 'assets/team/hakan.png', color: '#0984e3' },
-        { name: 'Tuncay Bayır', role: 'Görüntü İşleme', image: 'assets/team/tuncay.png', color: '#6c5ce7' }
+        {
+            name: 'Rabia Kıratlı',
+            role: 'Takım Kaptanı & AI Developer',
+            image: 'assets/team/rabia.png',
+            color: '#00b894',
+            linkedin: 'https://www.linkedin.com/in/rabiakiratlieng/',
+            bio: 'AI Developer | Focused on Computer Vision, NLP and Predictive Analytics'
+        },
+        {
+            name: 'Hakan Çiftçi',
+            role: 'Full Stack Developer',
+            image: 'assets/team/hakan.png',
+            color: '#0984e3',
+            linkedin: 'https://www.linkedin.com/in/hakan-%C3%A7ift%C3%A7i-166893254/',
+            bio: 'Full Stack Developer'
+        }
     ];
 
-    techStack = [
-        { name: 'TensorFlow', icon: '🧠' },
-        { name: 'PyTorch', icon: '🔥' },
-        { name: 'Python', icon: '🐍' },
-        { name: 'OpenCV', icon: '👁️' },
-        { name: 'NumPy', icon: '📊' },
-        { name: 'Scikit-learn', icon: '📈' },
-        { name: 'DICOM', icon: '🏥' },
-        { name: 'CUDA', icon: '⚡' },
+
+    ecoNodes = [
+        {
+            icon: 'scan-outline', color: '#6c5ce7', rgb: '108, 92, 231', ox: 0, oy: -180, lp: 'top',
+            title: 'MRI Görüntüleme',
+            desc: 'T1/T2 ve FLAIR MRI sekanslarından elde edilen beyin tarama görüntüleri. DICOM formatında işlenerek model girdisi oluşturulur.',
+            tags: ['DICOM', 'T1/T2', 'FLAIR', '3D Seg.']
+        },
+        {
+            icon: 'git-network-outline', color: '#0984e3', rgb: '9, 132, 227', ox: 127, oy: -127, lp: 'tr',
+            title: 'Genomik Veri',
+            desc: 'IDH mutasyonu, MGMT metilasyonu ve 1p/19q kodelerasyon gibi biyomarkerlar tümör sınıflandırmasına katkı sağlar.',
+            tags: ['IDH', 'MGMT', 'WGS', 'Biyomarker']
+        },
+        {
+            icon: 'document-text-outline', color: '#0984e3', rgb: '9, 132, 227', ox: 180, oy: 0, lp: 'r',
+            title: 'Klinik Kayıtlar',
+            desc: 'Hasta yaşı, semptom süresi ve nörolojik muayene bulguları model bağlamını zenginleştirir.',
+            tags: ['Anamnez', 'Nöroloji', 'EHR', 'ICD-10']
+        },
+        {
+            icon: 'flask-outline', color: '#00b894', rgb: '0, 184, 148', ox: 127, oy: 127, lp: 'br',
+            title: 'Klinik Denemeler',
+            desc: 'Onkoloji klinik trial tabanlarından elde edilen tedavi yanıt verileri model çıktılarıyla kıyaslanır.',
+            tags: ['RCT', 'ClinicalTrials', 'Faz II/III']
+        },
+        {
+            icon: 'medkit-outline', color: '#00b894', rgb: '0, 184, 148', ox: 0, oy: 180, lp: 'b',
+            title: 'Eczacılık Verisi',
+            desc: 'Temozolomid ve bevacizumab doz-yanıt ilişkileri tedavi öneri sistemine entegre edilir.',
+            tags: ['Temozolomid', 'Bevacizumab', 'PK/PD']
+        },
+        {
+            icon: 'business-outline', color: '#e17055', rgb: '225, 112, 85', ox: -127, oy: 127, lp: 'bl',
+            title: 'Hastane Verileri',
+            desc: 'Ameliyat notları, patoloji raporları ve postop takip verileri prognoz modellemesinde kullanılır.',
+            tags: ['Patoloji', 'HL7 FHIR', 'IHE']
+        },
+        {
+            icon: 'watch-outline', color: '#e17055', rgb: '225, 112, 85', ox: -180, oy: 0, lp: 'l',
+            title: 'Giyilebilir Cihazlar',
+            desc: 'Akıllı saat ve sensörlerden gelen kalp atışı, oksijen satürasyonu verileri yaşam kalitesini izler.',
+            tags: ['Wearable', 'IoT', 'EEG', 'SpO2']
+        },
+        {
+            icon: 'server-outline', color: '#6c5ce7', rgb: '108, 92, 231', ox: -127, oy: -127, lp: 'tl',
+            title: 'E-Sağlık Kayıtları',
+            desc: 'HIPAA/GDPR uyumlu elektronik sağlık kayıt sistemlerinden elde edilen yapılandırılmış hasta verileri.',
+            tags: ['HIPAA', 'GDPR', 'FHIR R4']
+        },
     ];
 
-    pipelineSteps = [
-        { num: '01', title: 'MRI Veri Girişi', desc: 'DICOM formatında beyin MRI görüntüleri', icon: '🧲' },
-        { num: '02', title: 'Ön İşleme', desc: 'Normalizasyon ve augmentasyon', icon: '⚙️' },
-        { num: '03', title: 'AI Model', desc: 'CNN + Attention derin öğrenme', icon: '🧠' },
-        { num: '04', title: 'Sınıflandırma', desc: '4 tümör türü tespiti', icon: '🎯' },
-        { num: '05', title: 'Segmentasyon', desc: 'Piksel düzeyinde tümör tespiti', icon: '🔬' },
-        { num: '06', title: 'Tedavi Planı', desc: 'Kişiselleştirilmiş öneri sistemi', icon: '💊' },
-    ];
 
     aboutCards = [
         { icon: 'bulb', title: 'Erken Teşhis', desc: 'Yapay zeka destekli MR analizi ile tümörlerin erken ve doğru tespiti', color: '#6c5ce7' },
@@ -76,11 +124,12 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     ];
 
     constructor(private ngZone: NgZone) {
-        addIcons({ sparkles, arrowDown, mail, heartCircle, shieldCheckmark, bulb, eyeOutline, chevronUp, checkmarkCircle });
+        addIcons({ sparkles, arrowDown, mail, heartCircle, shieldCheckmark, bulb, eyeOutline, chevronUp, checkmarkCircle, scanOutline, gitNetworkOutline, documentTextOutline, flaskOutline, medkitOutline, businessOutline, watchOutline, serverOutline, arrowBackCircleOutline, logoLinkedin, closeOutline });
     }
 
     ngOnInit() {
         this.startTyping();
+        // Skip initial auto-cycle for ecosystem as per user request to hide it initially
     }
 
     ngAfterViewInit() {
@@ -92,6 +141,7 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
     ngOnDestroy() {
         clearInterval(this.typingInterval);
         clearInterval(this.cursorInterval);
+        this.stopAutoCycle();
     }
 
     // ----- Particles.js -----
@@ -187,9 +237,6 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
                         const delay = parseInt(el.dataset['delay'] || '0', 10);
                         setTimeout(() => el.classList.add('visible'), delay);
 
-                        if (el.classList.contains('metrics-trigger')) {
-                            this.animateMetrics();
-                        }
                     }
                 });
             },
@@ -201,21 +248,50 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
         }, 100);
     }
 
-    animateMetrics() {
-        this.animatedMetrics.forEach((m) => {
-            setTimeout(() => {
-                const duration = 1800;
-                const start = performance.now();
-                const animate = (now: number) => {
-                    const elapsed = now - start;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 4);
-                    m.value = Math.round(eased * m.target * 10) / 10;
-                    if (progress < 1) requestAnimationFrame(animate);
-                };
-                requestAnimationFrame(animate);
-            }, m.delay);
-        });
+
+    startAutoCycle() {
+        this.stopAutoCycle();
+        this.autoCycleInterval = setInterval(() => {
+            const current = this.activeEcoNode ?? -1;
+            this.activeEcoNode = (current + 1) % this.ecoNodes.length;
+        }, 5000);
+    }
+
+    stopAutoCycle() {
+        if (this.autoCycleInterval) {
+            clearInterval(this.autoCycleInterval);
+        }
+    }
+
+    resetAutoCycle() {
+        this.stopAutoCycle();
+        this.startAutoCycle();
+    }
+
+    hoverNode(idx: number) {
+        this.stopAutoCycle();
+        // Do not update activeEcoNode on hover as per user request
+    }
+
+    selectNode(idx: number) {
+        this.activeEcoNode = idx;
+        this.resetAutoCycle();
+    }
+
+    closeNode() {
+        this.activeEcoNode = null;
+    }
+
+    leaveNode() {
+        this.startAutoCycle();
+    }
+
+    openMember(m: any) {
+        this.selectedMember = m;
+    }
+
+    closeMember() {
+        this.selectedMember = null;
     }
 
     scrollTo(id: string) {
