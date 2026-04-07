@@ -610,10 +610,15 @@ $radius: 18px;
 // ============================
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 600px;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 960px;
     margin: 0 auto;
-    gap: 24px;
+    gap: 20px;
+
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+    }
 }
 
 .team-card {

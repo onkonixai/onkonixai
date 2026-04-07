@@ -60,6 +60,14 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
             color: '#0984e3',
             linkedin: 'https://www.linkedin.com/in/hakan-%C3%A7ift%C3%A7i-166893254/',
             bio: 'Full Stack Developer'
+        },
+        {
+            name: 'Tuncay Bayır',
+            role: 'AI Developer',
+            image: 'assets/team/tuncay.png',
+            color: '#e57a00ff',
+            linkedin: 'https://www.linkedin.com/in/tuncayorgundar/',
+            bio: 'AI Developer'
         }
     ];
 
